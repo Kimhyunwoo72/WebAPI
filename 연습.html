@@ -1,274 +1,853 @@
-<div class="subpagebody subpage02 reservation">
+<!doctype html>
+<html lang="ko">
 
-    <div class="inner02">
-        <div class="gradientbox">
-            <div class="gradient_top"></div>
-            <div class="gradient_con">
-                <p>외래진료절차 안내입니다.</p>
-                <p>고려대학교 구로병원에서는 보다 편리하고 빠른 진료예약을 위해 <span class="t_bold color_main">전화예약, 모바일앱예약, 챗봇예약, 온라인예약, 방문예약</span> 서비스 모두를 제공해드리고 있습니다.</p>
-                <p class="mt40 color_main"><img src="/resource/images/sub/phone01.png" alt=""><span class="t_bold ml10">문의전화 1577-9966</span></p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Osang Knowledge & Technology</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site/ui_common/css/reset.css">
+    <link rel="stylesheet" href="/site/ui_common/css/slick.css">
+    <link rel="stylesheet" href="/site/ui_common/css/ui_common.css">
+    <link rel="stylesheet" href="/site/css/main.css">
+    <script src="/site/ui_common/js/jquery.min.js"></script>
+    <script src="/site/ui_common/js/jquery-ui.min.js"></script>
+    <script src="/site/ui_common/js/gsap.min.js"></script>
+    <script src="/site/ui_common/js/slick.min.js"></script>
+    <script src="/site/ui_common/js/ui_common.js"></script>
+
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="pop_wrap " id="new_pop" style="display: none;">
+
+            <!--<script> 
+		$(document).ready(function(){ 
+			cookiedata = document.cookie; 
+			if(cookiedata.indexOf("close=Y")<0){ 
+				$("#new_pop").show(); 
+			}else{ 
+				$("#new_pop").hide(); 
+			} 
+		}); 
+		
+		function exit(){ 
+			if($("input[name=layer_close]").is(":checked") == true){ 
+				setCookie("close","Y",1); 
+			} 
+			
+			$("#new_pop").hide(); 
+		} 
+		
+		function exit2(){ 
+			$("#new_pop").hide(); 
+			setCookie("close","Y",1); 
+		} 
+		
+		function setCookie(cname, cvalue, exdays) { 
+			var d = new Date(); 
+			d.setTime(d.getTime() + (exdays*24*60*60*1000)); //시간설정 
+			var expires = "expires="+d.toUTCString(); var temp = cname + "=" + cvalue + "; " + expires; 
+			document.cookie = temp; 
+		} 
+	</script>-->
+            <%@include file="site/inc/modal.jsp" %>
+        </div>
+        <header id="header">
+            <a href="index.jsp" class="top_logo"><img src="/site/ui_common/images/common/top_logo.png" alt=""></a>
+            <div id="top_header">
+                <div class="inner">
+                    <ul id="gnb" class="clearfix">
+                        <li><a href="/site/subpage/aboutus.jsp">ABOUT US</a></li>
+                        <li><a href="/site/subpage/work/work.jsp">WORKS</a></li>
+                        <li><a href="/site/subpage/contactus.jsp">CONTACT US</a></li>
+                        <li><a href="/site/subpage/marketfore.jsp">MARKETFORE</a></li>
+                        <li><a href="/site/subpage/vrfore.jsp">VRFORE</a></li>
+                        <li><a href="/site/subpage/itsm/introduction.jsp">OSE_ITSM</a></li>
+                        <li><a href="/site/subpage/eCommerce/platform.jsp">eCommerce</a></li>
+                    </ul>
+                </div>
             </div>
+            <button class="menu_btn">
+                <span class="menu_btn_inner">
+                    <em class="icon_bar">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </em>
+                    <em class="icon_close">
+                        <i></i>
+                        <i></i>
+                    </em>
+                </span>
+            </button>
+            <div id="nav">
+                <div class="nav_inner">
+                    <div class="menu_box clearfix">
+                        <div class="gnb">
+                            <ul>
+                                <li>
+                                    <a href="/site/subpage/aboutus.jsp">
+                                        <span class="tit">
+                                            <p class="tit_top">About Us</p>
+                                            <p class="tit_bg">About Us</p>
+                                        </span>
+                                        <em class="deco"></em>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/site/subpage/work/work.jsp">
+                                        <span class="tit">
+                                            <p class="tit_top">Works</p>
+                                            <p class="tit_bg">Works</p>
+                                        </span>
+                                        <em class="deco"></em>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/site/subpage/contactus.jsp">
+                                        <span class="tit">
+                                            <p class="tit_top">Contact Us</p>
+                                            <p class="tit_bg">Contact Us</p>
+                                        </span>
+                                        <em class="deco"></em>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/site/subpage/marketfore.jsp">
+                                        <span class="tit">
+                                            <p class="tit_top">Marketfore</p>
+                                            <p class="tit_bg">Marketfore</p>
+                                        </span>
+                                        <em class="deco"></em>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/site/subpage/itsm/introduction.jsp">
+                                        <span class="tit">
+                                            <p class="tit_top">OSE_ITSM</p>
+                                            <p class="tit_bg">OSE_ITSM</p>
+                                        </span>
+                                        <em class="deco"></em>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/site/subpage/eCommerce/platform.jsp">
+                                        <span class="tit">
+                                            <p class="tit_top">eCommerce1</p>
+                                            <p class="tit_bg">eCommerce</p>
+                                        </span>
+                                        <em class="deco"></em>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="company_info">
+                            <ul>
+                                <li>
+                                    <img src="/site/ui_common/images/common/call.png" alt="">
+                                    <p><strong>Tel.</strong><em> 070 7772 7766</em></p>
+                                </li>
+                                <li>
+                                    <img src="/site/ui_common/images/common/fax.png" alt="">
+                                    <p><strong>Fax.</strong><em> 070 8224 0874</em></p>
+                                </li>
+                                <li>
+                                    <img src="/site/ui_common/images/common/mail.png" alt="">
+                                    <p><em>osang@osangtech.co.kr</em></p>
+                                </li>
+                            </ul>
+                            <a class=" down" target="_blank" href="http://www.osangtech.co.kr/file/%ED%9A%8C%EC%82%AC%EC%86%8C%EA%B0%9C%EC%84%9C_%EC%98%A4%EC%83%81%ED%85%8C%ED%81%AC%EB%86%80%EB%A1%9C%EC%A7%80.pdf"><span>회사소개서 다운로드</span></a>
+                            <p class="add">서울시 구로구 디지털로 273(구로동 212-30) <br>에이스트윈타워2차 506호</p>
+                            <p class="copy tabMo">ⓒ OSANGTECH. all rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div id="container">
+            <div class="main_visual_wrap">
+                <div class="slide img_type02 se8 test">
+                    <div class="inner">
+                        <div class="textbox">
+                            <div class="rightbox_wrap onlyTab onlyMo">
+                                <div class="img_wrap ts02">
+                                    <img src="/site/images/main/com_khh.png" alt="">
+                                </div>
+                            </div>
+                            <p class="client ts03">
+                                <span>Client.</span>
+                                <span>고려대학교의료원</span>
+                            </p>
+                            <div class="v_txt_wrap">
+                                <div class="v_txt01 v_txt">
+                                    <div class="img_wrap ts01">
+                                        <img src="/site/images/main/com_230925.png" alt="메타버스 채용박람회 운영">
+                                    </div>
+                                </div>
+                                <div class="v_txt02 v_txt">
+                                    <p class="ts02">메타버스 채용박람회 운영</p>
+                                </div>
+                            </div>
+                            <a href="" class="go_btn ts03" target="_blank">READ MORE</a>
+                        </div>
+                        <div class="rightbox_wrap top-style onlyPc">
+                            <div class="img_wrap ts02">
+                                <div class="ddd">
+                                    <!--<img src="/site/images/main/pngwing.png">-->
+                                    <div class="eee">
+                                        <div class="aaa">
+                                            <img src="/site/images/main/scs.png" id="movingImage">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span style="background-image:url('/site/images/main/main_visual_khh01.png')" class="onlyPc mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_khh01_t.jpg')" class="onlyTab mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_khh01_m.jpg')" class="onlyMo mv" alt=""></span>
+                </div>
+                <!-- 1. 우리금융저축은행 통합포털 구축 (2023) -->
+                <div class="slide img_type02 se1">
+                    <div class="inner">
+                        <div class="textbox">
+                            <div class="rightbox_wrap onlyTab onlyMo">
+                                <div class="img_wrap ts02">
+                                    <img src="/site/images/main/com_230918_1.png">
+                                </div>
+                            </div>
+                            <p class="client ts03">
+                                <span>Client.</span>
+                                <span>우리금융저축은행</span>
+                            </p>
+                            <div class="v_txt_wrap">
+                                <div class="v_txt01 v_txt">
+                                    <div class="img_wrap ts01">
+                                        <img src="/site/images/main/main_text_23918_1.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="v_txt02 v_txt">
+                                    <p class="ts02">통합포털 구축</p>
+                                </div>
+                            </div>
+                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
+                        </div>
+                        <div class="rightbox_wrap onlyPc">
+                            <div class="img_wrap ts02">
+                                <img src="/site/images/main/com_230918_1.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_1.jpg')" class="onlyPc mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_1_t.jpg')" class="onlyTab mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_1_m.jpg')" class="onlyMo mv" alt=""></span>
+                </div>
+                <!-- 2. 우리금융저축은행 웹어워드 수상 내역-->
+                <div class="slide img_type01">
+                    <div class="inner">
+                        <div class="textbox">
+                            <div class="rightbox_wrap onlyTab onlyMo">
+                                <div class="img_wrap ts02">
+                                    <img src="/site/images/main/web_award01.png" alt="">
+                                    <p>WEB AWOARD</p>
+                                </div>
+                            </div>
+                            <p class="client ts03">
+                                <span>항상 더 멋진 모습으로 찾아가겠습니다.</span>
+                            </p>
+                            <div class="v_txt_wrap">
+                                <div class="v_txt01 v_txt">
+                                    <div class="img_wrap ts01">
+                                        <div class="img_wrap ts01"><img src="/site/images/main/main_v_txt_webaw.png" alt=""></div>
+                                    </div>
+                                </div>
+                                <div class="v_txt02 v_txt">
+                                    <p class="ts02">은행부분 대상 수상</p>
+                                </div>
+                            </div>
+                            <a href="https://www.woorisavingsbank.com/main/main.do" class="go_btn ts03" target="_blank">READ MORE</a>
+                        </div>
+                        <div class="rightbox_wrap onlyPc">
+                            <div class="img_wrap ts02">
+                                <img src="/site/images/main/web_award01.png" alt="">
+                                <p>WEB AWOARD</p>
+                            </div>
+                        </div>
+                    </div>
+                    <span style="background-image:url('/site/images/main/main_visual_webaw.jpg')" class="onlyPc mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_webaw_t.jpg')" class="onlyTab mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_webaw_m.jpg')" class="onlyMo mv" alt=""></span>
+                </div>
+                <!-- 3. 고려대학교의료원 홈페이지 리뉴얼(2023) -->
+                <div class="slide">
+                    <div class="inner">
+                        <div class="textbox">
+                            <p class="client ts03">
+                                <span>Client.</span>
+                                <span>고려대학교의료원</span>
+                            </p>
+                            <div class="v_txt_wrap">
+                                <div class="v_txt01 v_txt">
+                                    <div class="img_wrap ts01"><img src="/site/images/main/main_text_230918_3.png" alt="고려대학교의료원"></div>
+                                </div>
+                                <div class="v_txt02 v_txt">
+                                    <p class="ts02">리뉴얼 홈페이지 구축</p>
+                                </div>
+                            </div>
+                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
+                        </div>
+                    </div>
+                    <span style="background-image:url('/site/images/main/main_visual_221110_1.png')" class="onlyPc mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_221110_1_t.png')" class="onlyTab mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_221110_1_m.png')" class="onlyMo mv" alt=""></span>
+                </div>
+                <!-- 4. 고려대학교의료원 연구중심병원 구축(2023) -->
+                <div class="slide img_type02 se4">
+                    <div class="inner">
+                        <div class="textbox">
+                            <div class="rightbox_wrap onlyTab onlyMo">
+                                <div class="img_wrap ts02">
+                                    <img src="/site/images/main/com_230918_4.png">
+                                </div>
+                            </div>
+                            <p class="client ts03">
+                                <span>Client.</span>
+                                <span>고려대학교의료원</span>
+                            </p>
+                            <div class="v_txt_wrap">
+                                <div class="v_txt01 v_txt">
+                                    <div class="img_wrap ts01"><img src="/site/images/main/main_text_230918_4.png" alt=""></div>
+                                </div>
+                                <div class="v_txt02 v_txt">
+                                    <p class="ts02">연구중심병원 구축</p>
+                                </div>
+                            </div>
+                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
+                        </div>
+                        <div class="rightbox_wrap onlyPc">
+                            <div class="img_wrap ts02">
+                                <img src="/site/images/main/com_230918_4.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_4.jpg')" class="onlyPc mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_4_t.jpg')" class="onlyTab mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_4_m.jpg')" class="onlyMo mv" alt=""></span>
+                </div>
+                <!-- 5. 한국임업진흥원 통합포털홈페이지 운영관리 사업 -->
+                <div class="slide se5">
+                    <div class="inner">
+                        <div class="textbox">
+                            <p class="client ts03">
+                                <span>Client.</span>
+                                <span>한국임업진흥원</span>
+                            </p>
+                            <div class="v_txt_wrap">
+                                <div class="v_txt01 v_txt">
+                                    <div class="img_wrap ts01">
+                                        <img src="/site/images/main/main_text_230918_5.png" alt="고려대학교의료원"><br>
+                                        <img src="/site/images/main/main_text_230918_5_2.png" alt="고려대학교의료원">
+                                    </div>
+                                </div>
+                                <div class="v_txt02 v_txt">
+                                    <p class="ts02">운영관리사업 (10년 연속)</p>
+                                </div>
+                            </div>
+                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
+                        </div>
+                    </div>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_5.jpg')" class="onlyPc mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_5_t.jpg')" class="onlyTab mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_5_m.jpg')" class="onlyMo mv" alt=""></span>
+                </div>
+                <!-- 6. 오토앤 카앤라이프몰 EW보증연장 상품 개발(2023) -->
+                <div class="slide ">
+                    <div class="inner">
+                        <div class="textbox">
+                            <p class="client ts03">
+                                <span>Client.</span>
+                                <span>오토앤</span>
+                            </p>
+                            <div class="v_txt_wrap">
+                                <div class="v_txt01 v_txt">
+                                    <div class="img_wrap ts01"><img src="/site/images/main/main_text_230918_6.png" alt="2023년 카앤라이프몰"></div>
+                                </div>
+                                <div class="v_txt02 v_txt">
+                                    <p class="ts02">EW보증연장 상품 개발</p>
+                                </div>
+                            </div>
+                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
+                        </div>
+                    </div>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_6.jpg')" class="onlyPc mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_6_t.jpg')" class="onlyTab mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_6_m.jpg')" class="onlyMo mv" alt=""></span>
+                </div>
+                <!-- 7. CMC 통합 및 산하기관 홈페이지 유지보수 -->
+                <div class="slide ">
+                    <div class="inner">
+                        <div class="textbox">
+                            <p class="client ts03">
+                                <span>Client.</span>
+                                <span>학교법인 가톨릭학원</span>
+                            </p>
+                            <div class="v_txt_wrap">
+                                <div class="v_txt01 v_txt">
+                                    <div class="img_wrap ts01"><img src="/site/images/main/main_text_230918_7.png" alt="CMC 통합홈페이지"></div>
+                                </div>
+                                <div class="v_txt02 v_txt">
+                                    <p class="ts02">홈페이지 유지보수 (7년 연속)</p>
+                                </div>
+                            </div>
+                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
+                        </div>
+                    </div>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_7.jpg')" class="onlyPc mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_7_t.jpg')" class="onlyTab mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_230918_7_m.jpg')" class="onlyMo mv" alt=""></span>
+                </div>
+                <!-- 8. 경희대학교의료원 홈페이지 통합 개편 및 유지보수 -->
+                <div class="slide img_type02 se8">
+                    <div class="inner">
+                        <div class="textbox">
+                            <div class="rightbox_wrap onlyTab onlyMo">
+                                <div class="img_wrap ts02">
+                                    <img src="/site/images/main/com_khh.png" alt="">
+                                </div>
+                            </div>
+                            <p class="client ts03">
+                                <span>Client.</span>
+                                <span>경희대학교 의료원</span>
+                            </p>
+                            <div class="v_txt_wrap">
+                                <div class="v_txt01 v_txt">
+                                    <div class="img_wrap ts01">
+                                        <img src="/site/images/main/main_v_txt_khh02.png" alt="2022년 웹어워드"><br>
+                                        <img src="/site/images/main/main_text_230918_8_2.png" alt="종합의료부분 대상 수상">
+                                    </div>
+                                </div>
+                                <div class="v_txt02 v_txt">
+                                    <p class="ts02">홈페이지 유지보수 (5년 연속)</p>
+                                </div>
+                            </div>
+                            <a href="" class="go_btn ts03" target="_blank">READ MORE</a>
+                        </div>
+                        <div class="rightbox_wrap onlyPc">
+                            <div class="img_wrap ts02">
+                                <img src="/site/images/main/com_khh.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <span style="background-image:url('/site/images/main/main_visual_khh01.jpg')" class="onlyPc mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_khh01_t.jpg')" class="onlyTab mv" alt=""></span>
+                    <span style="background-image:url('/site/images/main/main_visual_khh01_m.jpg')" class="onlyMo mv" alt=""></span>
+                </div>
+
+
+                <!-- 지난 슬라이드 -->
+
+                <!-- <div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>고려대학교의료원</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_text_221110_01.png" alt="고려대학교의료원"></div>
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">사회공헌사업본부 홈페이지 구축</p>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual_221110_2.png')" class="onlyPc mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual_221110_2_t.png')" class="onlyTab mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual_221110_2_m.png')" class="onlyMo mv"alt=""></span>
+				                </div>
+				                <div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>오토앤</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_text_221110_03.png" alt="고려대학교의료원"></div>
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">이커머스 플랫폼 마케팅 기능 구축</p>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual_221110_3.png')" class="onlyPc mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual_221110_3_t.png')" class="onlyTab mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual_221110_3_m.png')" class="onlyMo mv"alt=""></span>
+				                </div>
+				<div class="slide img_type02">
+					<div class="inner"style="width: 1220px; max-width:100%;">
+						<div class="textbox">
+							<div class="rightbox_wrap onlyTab onlyMo">
+							<div class="img_wrap ts02">
+								<img src="/site/images/main/com_khh.png" alt="">
+							</div>
+						</div>
+							<p class="client ts03">
+								<span class="img_type01_p">항상 더 멋진 모습으로 찾아가겠습니다.</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt_khh02.png" alt=""></div>
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">종합의료부분 대상 수상</p>
+								</div>
+							</div>
+							<a href="https://www.khmc.or.kr/kr/main.do" class="go_btn ts03" target="_blank">READ MORE</a>
+						</div>
+						<div class="rightbox_wrap onlyPc">
+							<div class="img_wrap ts02">
+								<img src="/site/images/main/com_khh.png" alt="">
+							</div>
+						</div>
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual_khh01.jpg')" class="onlyPc mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual_khh01_t.jpg')" class="onlyTab mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual_khh01_m.jpg')" class="onlyMo mv"alt=""></span>
+				</div>
+				<div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>(주)페퍼저축은행</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt_pep.png" alt=""></div>
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">홈페이지 리뉴얼</p>
+								</div>
+							</div>
+							<a href="https://loan.pepperbank.kr/" class="go_btn ts03" target="_blank">READ MORE</a>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual_pep.jpg')" class="onlyPc mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual_pep_t.jpg')" class="onlyTab mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual_pep_m.jpg')" class="onlyMo mv"alt=""></span>
+				</div>
+				<div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>(주)평화이즈</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt_sim.png" alt=""></div>
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">홈페이지 신규 구축</p>
+								</div>
+							</div>
+							<a href="https://www.cmcseoul.or.kr/ccv/page/main" class="go_btn ts03" target="_blank">READ MORE</a>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual_sim.jpg')" class="onlyPc mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual_sim_t.jpg')" class="onlyTab mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual_sim_m.jpg')" class="onlyMo mv"alt=""></span>
+				</div>
+				<div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>(주)브이씨</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt01.png" alt=""></div>
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">신규 홈페이지 구축</p>
+								</div>
+							</div>
+							<a href="https://www.viruscleanlab.com/index.vc" class="go_btn ts03" target="_blank">READ MORE</a>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual01.jpg')" class="onlyPc mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual01_t.jpg')" class="onlyTab mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual01_m.jpg')" class="onlyMo mv"alt=""></span>
+				                </div>
+				                <div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>해양수산과학기술진흥원</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt02.png" alt=""></div>                                    
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">온라인 플랫폼 개선</p>
+								</div>
+							</div>
+							<a href="https://ofris.kimst.re.kr/tech-trade/index.do" class="go_btn ts03" target="_blank">READ MORE</a>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual02.jpg')" class="onlyPc mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual02_t.jpg')" class="onlyTab mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual02_m.jpg')" class="onlyMo mv"alt=""></span>
+				</div>
+				<div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>경희대학교의료원</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt03.png" alt=""></div>				
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02 ls2">유지보수 등 운영업체(5개년)</p>
+								</div>
+							</div>
+							<a href="javascript:;" class="go_btn ts03">READ MORE</a>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual03.jpg')" class="onlyPc mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual03_t.jpg')" class="onlyTab mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual03_m.jpg')" class="onlyMo mv"alt=""></span>
+				</div>
+				<div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>오토앤(주)</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt04.png" alt=""></div>				
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">레드멤버스몰 리뉴얼</p>
+								</div>
+							</div>
+							<a href="/site/subpage/work/work_sub09.jsp" class="go_btn ts03">READ MORE</a>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual04.jpg')" class="onlyPc mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual04_t.jpg')" class="onlyTab mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual04_m.jpg')" class="onlyMo mv"alt=""></span>
+				</div> 
+				<div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>(주)평화이즈</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt05.png" alt=""></div>				
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">홈페이지 신규 구축</p>
+								</div>
+							</div>
+							<a href="/site/subpage/work/work_sub06.jsp" class="go_btn ts03">READ MORE</a>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual05.jpg')" class="onlyPc mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual05_t.jpg')" class="onlyTab mv"alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual05_m.jpg')" class="onlyMo mv"alt=""></span>
+				</div>
+				<div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>(주)평화이즈</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt06.png" alt=""></div>			
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">홈페이지 구축</p>
+								</div>
+							</div>
+							<a href="/site/subpage/work/work_sub08.jsp" class="go_btn ts03">READ MORE</a>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual06.jpg')" class="onlyPc mv" alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual06_t.jpg')" class="onlyTab mv" alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual06_m.jpg')" class="onlyMo mv"alt=""></span>
+				</div>
+				<div class="slide blue">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>한국동서발전(주)</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt07.png" alt=""></div>		
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">구축관련 구매사업</p>
+								</div>
+							</div>
+							
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual07.jpg')" class="onlyPc mv" alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual07_t.jpg')" class="onlyTab mv" alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual07_m.jpg')" class="onlyMo mv"alt=""></span>
+				</div>
+				<div class="slide">
+					<div class="inner">
+						<div class="textbox">
+							<p class="client ts03">
+								<span>Client.</span>
+								<span>한국임업진흥원</span>
+							</p>
+							<div class="v_txt_wrap">
+								<div class="v_txt01 v_txt">
+									<div class="img_wrap  ts01"><img src="/site/images/main/main_v_txt08.png" alt=""></div>					
+								</div>
+								<div class="v_txt02 v_txt">
+									<p class="ts02">운영 및 유지관리</p>
+								</div>
+							</div>
+							<a href="/site/subpage/work/work_sub01.jsp" class="go_btn ts03">READ MORE</a>
+						</div>	
+					</div>
+					<span style="background-image:url('/site/images/main/main_visual08.jpg')"class="onlyPc mv" alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual08_t.jpg')" class="onlyTab mv" alt=""></span>
+					<span style="background-image:url('/site/images/main/main_visual08_m.jpg')" class="onlyMo mv"alt=""></span>
+				</div> -->
+
+                <!-- end: 지난 슬라이드 -->
+
+
+            </div>
+            <div class="slide_ind tabPc">
+                <p class="now">01</p>
+                <div class="grp"><span></span></div>
+                <p>08</p>
+            </div>
+            <div class="mo_slide_ind onlyMo">
+                <span class="now">01</span>&nbsp;&nbsp;/&nbsp;&nbsp;<span class="all"></span>
+            </div>
+            <img class="slide_icon onlyPc" src="/site/images/main/slide_icon.png" alt="">
         </div>
-
-        <div class="gui_wrap">
-            <ul>
-                <li>
-                    <div class="prognosis_wrap">
-                        <h3 class="list_s">외래진료 접수 및 진료시간표 안내</h3>
-                    </div>
-                    <div class="table_type04 mt10">
-                        <table>
-                            <caption><span class="blind_lab">외래진료 접수 및 진료시간표안내 폼 제공</span></caption>
-                            <colgroup>
-                                <col width="20%">
-                                <col width="40%">
-                                <col width="40%">
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>구분</th>
-                                    <th>접수시간</th>
-                                    <th>진료시간</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="bg_f6 color_111 t_bold">평일</td>
-                                    <td>08:30 ~ 16:00</td>
-                                    <td>09:00 ~ 17:30</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg_f6 color_111 t_bold">토요일</td>
-                                    <td>토요일</td>
-                                    <td>
-                                        <p>08:30 ~ 11:30</p>
-                                        <p>(소화기내과, 정형외과, 치과 등 격주 진료)</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">응급센터는 휴일없이 24시간 진료합니다.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="consult_wrap mt40">
-                        <div class="step_consult col_3">
-                            <div class="step">
-                                <p class="cir">01</p>
-                                <p class="txt dotline">예약</p>
-                            </div>
-                            <div class="step">
-                                <p class="cir">02</p>
-                                <p class="txt dotline">접수</p>
-                            </div>
-                            <div class="step">
-                                <p class="cir">03</p>
-                                <p class="txt dotline">수납</p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="prognosis_wrap">
-                        <h3 class="list_s">1단계 : 진료 예약 안내</h3>
-                    </div>
-                    <p class="subtit-txt pl20">전화예약</p>
-                    <div class="prognosis_wrap">
-                        <ul class="bullet_type01">
-                            <li>전화 예약을 통하여 초,재진 모두 진료예약을 할 수 있습니다.</li>
-                            <li>예약가능시간 : 평일 08:00 ~ 18:00, 주말 08:00 ~ 13:00</li>
-                            <li class="color_main t_bold">전화번호 : 1577-9966</li>
-                        </ul>
-                    </div>
-                    <p class="subtit-txt pl20 mt40">모바일APP 예약</p>
-                    <div class="prognosis_wrap">
-                        <ul class="bullet_type01">
-                            <li>모바일 어플리케이션 설치 후 진료예약 및 다양한 서비스를 이용하실 수 있습니다.</li>
-                            <li>진료예약, 진료예약 조회, 검사결과, 진료내역 등을 확인하실 수 있습니다.</li>
-                            <li>24시간 예약 가능</li>
-                        </ul>
-                    </div>
-                    <p class="subtit-txt pl20 mt40">챗봇 예약</p>
-                    <div class="prognosis_wrap">
-                        <ul class="bullet_type01">
-                            <li>홈페이지 또는 모바일을 통하여 병원안내, 진료예약 등을 확인하실 수 있습니다.</li>
-                            <li>24시간 예약 가능</li>
-                        </ul>
-                    </div>
-
-                    <div class="clear  mt40">
-                        <p class="subtit-txt f_l pl20">온라인 예약</p>
-                        <a href="/kr/appointment/appointment.do" class="btn_main solo_btn f_r"><span>온라인예약 바로가기</span></a>
-                    </div>
-                    <div class="prognosis_wrap">
-                        <ul class="bullet_type01">
-                            <li>온라인 예약을 통하여 초,재진 모두 진료예약을 할 수 있습니다.</li>
-                            <li>단, 온라인 예약은 회원가입을 할 경우에만 가능합니다.</li>
-                            <li class="color_main t_bold">예약문의 : 1577-9966</li>
-                            <li class="color_main">예약일정이 확정되면(등록) 예약일 전날 고객님의 핸드폰으로 SMS문자를 발송하여 드리오니 확인하시고 내원하시기 바랍니다.</li>
-                        </ul>
-                    </div>
-                    <div class="graybox linebox mt40">
-                        <div class="gray_inner clear">
-                            <div class="f_l">
-                                <p class="subtit-txt">온라인 예약이 어려울 경우 전화예약, 모바일앱, 챗봇을 통한 예약이 가능합니다.</p>
-                                <div class="prognosis_wrap mt20">
-                                    <ul class="bullet_type01 dep3">
-                                        <li><span class="t_bold color_111">전화예약</span> : 1577-9966</li>
-                                        <li><span class="t_bold color_111">모바일앱</span> : 휴대전화 카메라로 QR코드를 스캔해보세요. 앱 설치 페이지로 안내해 드립니다.</li>
-                                        <li><span class="t_bold color_111">챗봇예약</span> : 홈페이지 또는 모바일앱을 통해 예약하시기 바랍니다.</li>
-                                        <li>온라인 예약은 회원가입 후 로그인을 한 경우 이용 가능합니다.</li>
-                                        <li>인터넷으로 예약 후 당일 취소는 전화로만 가능합니다.</li>
-                                    </ul>
-                                </div>
-                                <p class="subtit-txt mt40">온라인 예약 참고사항</p>
-                                <div class="prognosis_wrap mt20">
-                                    <ul class="bullet_type01 dep3">
-                                        <li>온라인 예약 후 취소절차 없이 내원하지 않을 시에는 앞으로 1개월 동안 온라인 진료예약을 하실 수 없는 불이익이 주어집니다. (전화예약 및 방문예약은 가능)</li>
-                                        <li>온라인 예약증빙을 위한 별도의 서류는 준비하지 않으셔도 됩니다.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="f_r">
-                                <img src="../../resource/images/sub/qr_guro_onlineguide02.png" alt="QR코드, 주소: https://mcare.lemonhc.com/mobile-ui/store/11100494" style="width: 90px;">
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="subtit-txt mt40 pl20">방문 예약</p>
-                    <div class="prognosis_wrap">
-                        <ul class="bullet_type01">
-                            <li>‘처음오시는 분 전용창구’(본관 1층, 미래관3층)를 통하여 예약 및 당일 접수를 확인 하실 수 있습니다.</li>
-                            <li>예약, 수납, 영상CD등록이 가능합니다.</li>
-                            <li>예약가능시간 : 평일 08:30 ~ 17:30</li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <div class="prognosis_wrap">
-                        <h3 class="list_s">2단계 : 접수 절차 안내</h3>
-                        <p class="sub-txt">예약된 진료일자에 신분증과 진료의뢰서를 지참하여 수납창구에서 진료비 수납 후 해당 진료과에서 진료를 받습니다.</p>
-                    </div>
-                    <div class="consult_wrap">
-                        <div class="step_consult col_3 top mt40">
-                            <div class="step">
-                                <p class="cir">01</p>
-                                <p class="txt color_blue dotline">진료접수</p>
-                                <div class="txt">
-                                    <p class="text_center">초진 : 신분증, 진료의뢰서 제출</p>
-                                    <p class="text_center">재진 : 신분증 제출</p>
-                                    <p class="text_center">- 진찰료 수납 및 접수증 수령&nbsp;</p>
-                                </div>
-                            </div>
-                            <div class="step">
-                                <p class="cir">02</p>
-                                <p class="txt color_blue dotline">진찰</p>
-                                <div class="txt">
-                                    <p class="text_center">해당 외래진료과에 진료접수증<br>(진료예약증) 제출</p>
-                                    <p class="text_center">진료 → 입원 결정<br>→ 입원예약 및 수속</p>
-                                </div>
-                                <div class="txt">
-                                </div>
-                            </div>
-                            <div class="step">
-                                <p class="cir">03</p>
-                                <p class="txt color_blue dotline">원무팀 진료비 수납창구</p>
-                                <div class="txt">
-                                    <p class="text_center">외래 진료비 수납 및 예약증 수령</p>
-                                </div>
-                                <div class="txt">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="step_consult col_3 bot con_3 mt40">
-                            <div class="step">
-                                <p class="cir">04</p>
-                                <p class="text_center">검사 시행 (필요시 각 검사실 예약)</p>
-                                <p class="text_center">처방전 발행기에서<br>투약 처방전 수령 → 원외약 구입</p>
-                                <div class="txt">
-                                </div>
-                            </div>
-                            <div class="step">
-                                <p class="cir">05</p>
-                                <div class="txt dotline">
-                                    <p class="text_center">귀가&nbsp;</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="prognosis_wrap">
-                        <h3 class="list_s">3단계 : 진료 수납 방법</h3>
-                        <p class="subtit-txt pl20">외래진료비</p>
-                        <ul class="bullet_type01 mt10">
-                            <li>진료비 수납은 <span class="color_main">카드, 현금</span> 모두 가능합니다.</li>
-                            <li>문의전화 : 02-2626-2048~2052</li>
-                        </ul>
-                    </div>
-                    <p class="subtit-txt mt40 pl20">진찰료</p>
-                    <div class="table_type04 scroll_x mt10">
-                        <table>
-                            <caption><span class="blind_lab">일반 진찰료 폼 제공</span></caption>
-                            <colgroup>
-                                <col width="10%">
-                                <col width="11.25%">
-                                <col width="11.25%">
-                                <col width="11.25%">
-                                <col width="11.25%">
-                                <col width="11.25%">
-                                <col width="11.25%">
-                                <col width="11.25%">
-                                <col width="11.25%">
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th rowspan="2">구분</th>
-                                    <th colspan="2">성인</th>
-                                    <th colspan="2">소아<br>(①만1세 미만)</th>
-                                    <th colspan="2">소아<br>(②만1세이상~만6세미만)</th>
-                                    <th rowspan="2" colspan="2">비고</th>
-                                </tr>
-                                <tr>
-                                    <th>주간</th>
-                                    <th>야간/공휴일</th>
-                                    <th>주간①</th>
-                                    <th>야간/공휴일①</th>
-                                    <th>주간②</th>
-                                    <th>야간/공휴일②</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="bg_f6 color_111 t_bold">초진</td>
-                                    <td>20,390</td>
-                                    <td>24,110</td>
-                                    <td>22,490</td>
-                                    <td>26,210</td>
-                                    <td>21,250</td>
-                                    <td>24,970</td>
-                                    <td rowspan="2" colspan="2">물리치료 재진 1일<br>3,910원</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg_f6 color_111 t_bold">재진</td>
-                                    <td>15,810</td>
-                                    <td>18,150</td>
-                                    <td>17,130</td>
-                                    <td>19,480</td>
-                                    <td>16,350</td>
-                                    <td>18,700</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="prognosis_wrap">
-                        <ul class="bullet_type01">
-                            <li>의료질평가지원금은 진찰료 외에 별도 산정</li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <footer id="footer">
+            <p class="copy onlyPc">ⓒ OSANGTECH. all rights reserved.</p>
+        </footer>
     </div>
-</div>
+</body>
+<script>
+
+
+    $(function () {
+
+
+        $('.main_visual_wrap').slick({
+            dots: true,
+            infinite: true,
+            speed: 1000,
+            autoplay: false,
+            autoplaySpeed: 4000,
+            pauseOnHover: false,
+            pauseOnFocus: false
+        });
+
+
+        $('.slick-active').addClass('on');
+        var all = $('.main_visual_wrap .slick-dots li').length;
+
+        if (all < 8) {
+            $('.mo_slide_ind .all').text('0' + all);
+        } else {
+            $('.mo_slide_ind .all').text(all);
+        }
+
+
+        $('.main_visual_wrap').on('afterChange', function () {
+            var idx = $('.main_visual_wrap .slick-dots .slick-active').index();
+            var now = idx + 1
+            if (now < 10) {
+                $('.slide_ind .now').text('0' + now);
+                $('.mo_slide_ind .now').text('0' + now);
+            } else {
+                $('.slide_ind .now').text(now);
+                $('.mo_slide_ind .now').text(now);
+            }
+            var grpW = now * 8;
+            $('.slide').removeClass('on');
+            $('.slick-active').addClass('on');
+            $('.slide_ind .grp span').width(grpW)
+
+
+        });
+
+        $('.main_visual_wrap').on('wheel', (function (e) {
+            e.preventDefault();
+
+            if (e.originalEvent.deltaY < 0) {
+                $(this).slick('slickPrev');
+            } else {
+                $(this).slick('slickNext');
+            }
+        }));
+    });
+
+
+    var initialX = 0;
+    var initialY = 0;
+
+    function startAnimation() {
+        var element = document.getElementById('movingImage');
+
+        // Y축으로 100으로 이동 (4초 동안)
+        element.style.top = '100px';
+        element.style.left = '100px';
+
+        // X축으로 0에서 50으로 이동 (처음 2초 동안)
+        setTimeout(function () {
+            element.style.left = '0px';
+        }, 2000);
+
+        // X축으로 50에서 0으로 이동 (3초부터 4초까지)
+        setTimeout(function () {
+            element.style.left = '100px';
+        }, 4000);
+    }
+
+    function resetAnimation() {
+        var element = document.getElementById('movingImage');
+
+        // 초기 위치로 즉시 이동
+        element.style.left = '0';
+        element.style.top = '0';
+    }
+
+</script>
+
+</html>
