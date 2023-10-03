@@ -1,853 +1,104 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Osang Knowledge & Technology</title>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/site/ui_common/css/reset.css">
-    <link rel="stylesheet" href="/site/ui_common/css/slick.css">
-    <link rel="stylesheet" href="/site/ui_common/css/ui_common.css">
-    <link rel="stylesheet" href="/site/css/main.css">
-    <script src="/site/ui_common/js/jquery.min.js"></script>
-    <script src="/site/ui_common/js/jquery-ui.min.js"></script>
-    <script src="/site/ui_common/js/gsap.min.js"></script>
-    <script src="/site/ui_common/js/slick.min.js"></script>
-    <script src="/site/ui_common/js/ui_common.js"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 예제</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-    <div id="wrap">
-        <div class="pop_wrap " id="new_pop" style="display: none;">
-
-            <!--<script> 
-		$(document).ready(function(){ 
-			cookiedata = document.cookie; 
-			if(cookiedata.indexOf("close=Y")<0){ 
-				$("#new_pop").show(); 
-			}else{ 
-				$("#new_pop").hide(); 
-			} 
-		}); 
-		
-		function exit(){ 
-			if($("input[name=layer_close]").is(":checked") == true){ 
-				setCookie("close","Y",1); 
-			} 
-			
-			$("#new_pop").hide(); 
-		} 
-		
-		function exit2(){ 
-			$("#new_pop").hide(); 
-			setCookie("close","Y",1); 
-		} 
-		
-		function setCookie(cname, cvalue, exdays) { 
-			var d = new Date(); 
-			d.setTime(d.getTime() + (exdays*24*60*60*1000)); //시간설정 
-			var expires = "expires="+d.toUTCString(); var temp = cname + "=" + cvalue + "; " + expires; 
-			document.cookie = temp; 
-		} 
-	</script>-->
-            <%@include file="site/inc/modal.jsp" %>
+    <div id="app">
+        <h1>게시판</h1>
+        <ul id="post-list">
+            <!-- 게시물 목록이 여기에 추가됩니다 -->
+        </ul>
+        <div id="pagination">
+            <!-- 페이지 버튼은 여기에 동적으로 추가됩니다 -->
         </div>
-        <header id="header">
-            <a href="index.jsp" class="top_logo"><img src="/site/ui_common/images/common/top_logo.png" alt=""></a>
-            <div id="top_header">
-                <div class="inner">
-                    <ul id="gnb" class="clearfix">
-                        <li><a href="/site/subpage/aboutus.jsp">ABOUT US</a></li>
-                        <li><a href="/site/subpage/work/work.jsp">WORKS</a></li>
-                        <li><a href="/site/subpage/contactus.jsp">CONTACT US</a></li>
-                        <li><a href="/site/subpage/marketfore.jsp">MARKETFORE</a></li>
-                        <li><a href="/site/subpage/vrfore.jsp">VRFORE</a></li>
-                        <li><a href="/site/subpage/itsm/introduction.jsp">OSE_ITSM</a></li>
-                        <li><a href="/site/subpage/eCommerce/platform.jsp">eCommerce</a></li>
-                    </ul>
-                </div>
-            </div>
-            <button class="menu_btn">
-                <span class="menu_btn_inner">
-                    <em class="icon_bar">
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                    </em>
-                    <em class="icon_close">
-                        <i></i>
-                        <i></i>
-                    </em>
-                </span>
-            </button>
-            <div id="nav">
-                <div class="nav_inner">
-                    <div class="menu_box clearfix">
-                        <div class="gnb">
-                            <ul>
-                                <li>
-                                    <a href="/site/subpage/aboutus.jsp">
-                                        <span class="tit">
-                                            <p class="tit_top">About Us</p>
-                                            <p class="tit_bg">About Us</p>
-                                        </span>
-                                        <em class="deco"></em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/site/subpage/work/work.jsp">
-                                        <span class="tit">
-                                            <p class="tit_top">Works</p>
-                                            <p class="tit_bg">Works</p>
-                                        </span>
-                                        <em class="deco"></em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/site/subpage/contactus.jsp">
-                                        <span class="tit">
-                                            <p class="tit_top">Contact Us</p>
-                                            <p class="tit_bg">Contact Us</p>
-                                        </span>
-                                        <em class="deco"></em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/site/subpage/marketfore.jsp">
-                                        <span class="tit">
-                                            <p class="tit_top">Marketfore</p>
-                                            <p class="tit_bg">Marketfore</p>
-                                        </span>
-                                        <em class="deco"></em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/site/subpage/itsm/introduction.jsp">
-                                        <span class="tit">
-                                            <p class="tit_top">OSE_ITSM</p>
-                                            <p class="tit_bg">OSE_ITSM</p>
-                                        </span>
-                                        <em class="deco"></em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/site/subpage/eCommerce/platform.jsp">
-                                        <span class="tit">
-                                            <p class="tit_top">eCommerce1</p>
-                                            <p class="tit_bg">eCommerce</p>
-                                        </span>
-                                        <em class="deco"></em>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="company_info">
-                            <ul>
-                                <li>
-                                    <img src="/site/ui_common/images/common/call.png" alt="">
-                                    <p><strong>Tel.</strong><em> 070 7772 7766</em></p>
-                                </li>
-                                <li>
-                                    <img src="/site/ui_common/images/common/fax.png" alt="">
-                                    <p><strong>Fax.</strong><em> 070 8224 0874</em></p>
-                                </li>
-                                <li>
-                                    <img src="/site/ui_common/images/common/mail.png" alt="">
-                                    <p><em>osang@osangtech.co.kr</em></p>
-                                </li>
-                            </ul>
-                            <a class=" down" target="_blank" href="http://www.osangtech.co.kr/file/%ED%9A%8C%EC%82%AC%EC%86%8C%EA%B0%9C%EC%84%9C_%EC%98%A4%EC%83%81%ED%85%8C%ED%81%AC%EB%86%80%EB%A1%9C%EC%A7%80.pdf"><span>회사소개서 다운로드</span></a>
-                            <p class="add">서울시 구로구 디지털로 273(구로동 212-30) <br>에이스트윈타워2차 506호</p>
-                            <p class="copy tabMo">ⓒ OSANGTECH. all rights reserved.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div id="container">
-            <div class="main_visual_wrap">
-                <div class="slide img_type02 se8 test">
-                    <div class="inner">
-                        <div class="textbox">
-                            <div class="rightbox_wrap onlyTab onlyMo">
-                                <div class="img_wrap ts02">
-                                    <img src="/site/images/main/com_khh.png" alt="">
-                                </div>
-                            </div>
-                            <p class="client ts03">
-                                <span>Client.</span>
-                                <span>고려대학교의료원</span>
-                            </p>
-                            <div class="v_txt_wrap">
-                                <div class="v_txt01 v_txt">
-                                    <div class="img_wrap ts01">
-                                        <img src="/site/images/main/com_230925.png" alt="메타버스 채용박람회 운영">
-                                    </div>
-                                </div>
-                                <div class="v_txt02 v_txt">
-                                    <p class="ts02">메타버스 채용박람회 운영</p>
-                                </div>
-                            </div>
-                            <a href="" class="go_btn ts03" target="_blank">READ MORE</a>
-                        </div>
-                        <div class="rightbox_wrap top-style onlyPc">
-                            <div class="img_wrap ts02">
-                                <div class="ddd">
-                                    <!--<img src="/site/images/main/pngwing.png">-->
-                                    <div class="eee">
-                                        <div class="aaa">
-                                            <img src="/site/images/main/scs.png" id="movingImage">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <span style="background-image:url('/site/images/main/main_visual_khh01.png')" class="onlyPc mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_khh01_t.jpg')" class="onlyTab mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_khh01_m.jpg')" class="onlyMo mv" alt=""></span>
-                </div>
-                <!-- 1. 우리금융저축은행 통합포털 구축 (2023) -->
-                <div class="slide img_type02 se1">
-                    <div class="inner">
-                        <div class="textbox">
-                            <div class="rightbox_wrap onlyTab onlyMo">
-                                <div class="img_wrap ts02">
-                                    <img src="/site/images/main/com_230918_1.png">
-                                </div>
-                            </div>
-                            <p class="client ts03">
-                                <span>Client.</span>
-                                <span>우리금융저축은행</span>
-                            </p>
-                            <div class="v_txt_wrap">
-                                <div class="v_txt01 v_txt">
-                                    <div class="img_wrap ts01">
-                                        <img src="/site/images/main/main_text_23918_1.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="v_txt02 v_txt">
-                                    <p class="ts02">통합포털 구축</p>
-                                </div>
-                            </div>
-                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
-                        </div>
-                        <div class="rightbox_wrap onlyPc">
-                            <div class="img_wrap ts02">
-                                <img src="/site/images/main/com_230918_1.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_1.jpg')" class="onlyPc mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_1_t.jpg')" class="onlyTab mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_1_m.jpg')" class="onlyMo mv" alt=""></span>
-                </div>
-                <!-- 2. 우리금융저축은행 웹어워드 수상 내역-->
-                <div class="slide img_type01">
-                    <div class="inner">
-                        <div class="textbox">
-                            <div class="rightbox_wrap onlyTab onlyMo">
-                                <div class="img_wrap ts02">
-                                    <img src="/site/images/main/web_award01.png" alt="">
-                                    <p>WEB AWOARD</p>
-                                </div>
-                            </div>
-                            <p class="client ts03">
-                                <span>항상 더 멋진 모습으로 찾아가겠습니다.</span>
-                            </p>
-                            <div class="v_txt_wrap">
-                                <div class="v_txt01 v_txt">
-                                    <div class="img_wrap ts01">
-                                        <div class="img_wrap ts01"><img src="/site/images/main/main_v_txt_webaw.png" alt=""></div>
-                                    </div>
-                                </div>
-                                <div class="v_txt02 v_txt">
-                                    <p class="ts02">은행부분 대상 수상</p>
-                                </div>
-                            </div>
-                            <a href="https://www.woorisavingsbank.com/main/main.do" class="go_btn ts03" target="_blank">READ MORE</a>
-                        </div>
-                        <div class="rightbox_wrap onlyPc">
-                            <div class="img_wrap ts02">
-                                <img src="/site/images/main/web_award01.png" alt="">
-                                <p>WEB AWOARD</p>
-                            </div>
-                        </div>
-                    </div>
-                    <span style="background-image:url('/site/images/main/main_visual_webaw.jpg')" class="onlyPc mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_webaw_t.jpg')" class="onlyTab mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_webaw_m.jpg')" class="onlyMo mv" alt=""></span>
-                </div>
-                <!-- 3. 고려대학교의료원 홈페이지 리뉴얼(2023) -->
-                <div class="slide">
-                    <div class="inner">
-                        <div class="textbox">
-                            <p class="client ts03">
-                                <span>Client.</span>
-                                <span>고려대학교의료원</span>
-                            </p>
-                            <div class="v_txt_wrap">
-                                <div class="v_txt01 v_txt">
-                                    <div class="img_wrap ts01"><img src="/site/images/main/main_text_230918_3.png" alt="고려대학교의료원"></div>
-                                </div>
-                                <div class="v_txt02 v_txt">
-                                    <p class="ts02">리뉴얼 홈페이지 구축</p>
-                                </div>
-                            </div>
-                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
-                        </div>
-                    </div>
-                    <span style="background-image:url('/site/images/main/main_visual_221110_1.png')" class="onlyPc mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_221110_1_t.png')" class="onlyTab mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_221110_1_m.png')" class="onlyMo mv" alt=""></span>
-                </div>
-                <!-- 4. 고려대학교의료원 연구중심병원 구축(2023) -->
-                <div class="slide img_type02 se4">
-                    <div class="inner">
-                        <div class="textbox">
-                            <div class="rightbox_wrap onlyTab onlyMo">
-                                <div class="img_wrap ts02">
-                                    <img src="/site/images/main/com_230918_4.png">
-                                </div>
-                            </div>
-                            <p class="client ts03">
-                                <span>Client.</span>
-                                <span>고려대학교의료원</span>
-                            </p>
-                            <div class="v_txt_wrap">
-                                <div class="v_txt01 v_txt">
-                                    <div class="img_wrap ts01"><img src="/site/images/main/main_text_230918_4.png" alt=""></div>
-                                </div>
-                                <div class="v_txt02 v_txt">
-                                    <p class="ts02">연구중심병원 구축</p>
-                                </div>
-                            </div>
-                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
-                        </div>
-                        <div class="rightbox_wrap onlyPc">
-                            <div class="img_wrap ts02">
-                                <img src="/site/images/main/com_230918_4.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_4.jpg')" class="onlyPc mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_4_t.jpg')" class="onlyTab mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_4_m.jpg')" class="onlyMo mv" alt=""></span>
-                </div>
-                <!-- 5. 한국임업진흥원 통합포털홈페이지 운영관리 사업 -->
-                <div class="slide se5">
-                    <div class="inner">
-                        <div class="textbox">
-                            <p class="client ts03">
-                                <span>Client.</span>
-                                <span>한국임업진흥원</span>
-                            </p>
-                            <div class="v_txt_wrap">
-                                <div class="v_txt01 v_txt">
-                                    <div class="img_wrap ts01">
-                                        <img src="/site/images/main/main_text_230918_5.png" alt="고려대학교의료원"><br>
-                                        <img src="/site/images/main/main_text_230918_5_2.png" alt="고려대학교의료원">
-                                    </div>
-                                </div>
-                                <div class="v_txt02 v_txt">
-                                    <p class="ts02">운영관리사업 (10년 연속)</p>
-                                </div>
-                            </div>
-                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
-                        </div>
-                    </div>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_5.jpg')" class="onlyPc mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_5_t.jpg')" class="onlyTab mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_5_m.jpg')" class="onlyMo mv" alt=""></span>
-                </div>
-                <!-- 6. 오토앤 카앤라이프몰 EW보증연장 상품 개발(2023) -->
-                <div class="slide ">
-                    <div class="inner">
-                        <div class="textbox">
-                            <p class="client ts03">
-                                <span>Client.</span>
-                                <span>오토앤</span>
-                            </p>
-                            <div class="v_txt_wrap">
-                                <div class="v_txt01 v_txt">
-                                    <div class="img_wrap ts01"><img src="/site/images/main/main_text_230918_6.png" alt="2023년 카앤라이프몰"></div>
-                                </div>
-                                <div class="v_txt02 v_txt">
-                                    <p class="ts02">EW보증연장 상품 개발</p>
-                                </div>
-                            </div>
-                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
-                        </div>
-                    </div>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_6.jpg')" class="onlyPc mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_6_t.jpg')" class="onlyTab mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_6_m.jpg')" class="onlyMo mv" alt=""></span>
-                </div>
-                <!-- 7. CMC 통합 및 산하기관 홈페이지 유지보수 -->
-                <div class="slide ">
-                    <div class="inner">
-                        <div class="textbox">
-                            <p class="client ts03">
-                                <span>Client.</span>
-                                <span>학교법인 가톨릭학원</span>
-                            </p>
-                            <div class="v_txt_wrap">
-                                <div class="v_txt01 v_txt">
-                                    <div class="img_wrap ts01"><img src="/site/images/main/main_text_230918_7.png" alt="CMC 통합홈페이지"></div>
-                                </div>
-                                <div class="v_txt02 v_txt">
-                                    <p class="ts02">홈페이지 유지보수 (7년 연속)</p>
-                                </div>
-                            </div>
-                            <a href="#" class="go_btn ts03" target="_blank">READ MORE</a>
-                        </div>
-                    </div>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_7.jpg')" class="onlyPc mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_7_t.jpg')" class="onlyTab mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_230918_7_m.jpg')" class="onlyMo mv" alt=""></span>
-                </div>
-                <!-- 8. 경희대학교의료원 홈페이지 통합 개편 및 유지보수 -->
-                <div class="slide img_type02 se8">
-                    <div class="inner">
-                        <div class="textbox">
-                            <div class="rightbox_wrap onlyTab onlyMo">
-                                <div class="img_wrap ts02">
-                                    <img src="/site/images/main/com_khh.png" alt="">
-                                </div>
-                            </div>
-                            <p class="client ts03">
-                                <span>Client.</span>
-                                <span>경희대학교 의료원</span>
-                            </p>
-                            <div class="v_txt_wrap">
-                                <div class="v_txt01 v_txt">
-                                    <div class="img_wrap ts01">
-                                        <img src="/site/images/main/main_v_txt_khh02.png" alt="2022년 웹어워드"><br>
-                                        <img src="/site/images/main/main_text_230918_8_2.png" alt="종합의료부분 대상 수상">
-                                    </div>
-                                </div>
-                                <div class="v_txt02 v_txt">
-                                    <p class="ts02">홈페이지 유지보수 (5년 연속)</p>
-                                </div>
-                            </div>
-                            <a href="" class="go_btn ts03" target="_blank">READ MORE</a>
-                        </div>
-                        <div class="rightbox_wrap onlyPc">
-                            <div class="img_wrap ts02">
-                                <img src="/site/images/main/com_khh.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <span style="background-image:url('/site/images/main/main_visual_khh01.jpg')" class="onlyPc mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_khh01_t.jpg')" class="onlyTab mv" alt=""></span>
-                    <span style="background-image:url('/site/images/main/main_visual_khh01_m.jpg')" class="onlyMo mv" alt=""></span>
-                </div>
-
-
-                <!-- 지난 슬라이드 -->
-
-                <!-- <div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>고려대학교의료원</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_text_221110_01.png" alt="고려대학교의료원"></div>
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">사회공헌사업본부 홈페이지 구축</p>
-								</div>
-							</div>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual_221110_2.png')" class="onlyPc mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual_221110_2_t.png')" class="onlyTab mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual_221110_2_m.png')" class="onlyMo mv"alt=""></span>
-				                </div>
-				                <div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>오토앤</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_text_221110_03.png" alt="고려대학교의료원"></div>
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">이커머스 플랫폼 마케팅 기능 구축</p>
-								</div>
-							</div>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual_221110_3.png')" class="onlyPc mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual_221110_3_t.png')" class="onlyTab mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual_221110_3_m.png')" class="onlyMo mv"alt=""></span>
-				                </div>
-				<div class="slide img_type02">
-					<div class="inner"style="width: 1220px; max-width:100%;">
-						<div class="textbox">
-							<div class="rightbox_wrap onlyTab onlyMo">
-							<div class="img_wrap ts02">
-								<img src="/site/images/main/com_khh.png" alt="">
-							</div>
-						</div>
-							<p class="client ts03">
-								<span class="img_type01_p">항상 더 멋진 모습으로 찾아가겠습니다.</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt_khh02.png" alt=""></div>
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">종합의료부분 대상 수상</p>
-								</div>
-							</div>
-							<a href="https://www.khmc.or.kr/kr/main.do" class="go_btn ts03" target="_blank">READ MORE</a>
-						</div>
-						<div class="rightbox_wrap onlyPc">
-							<div class="img_wrap ts02">
-								<img src="/site/images/main/com_khh.png" alt="">
-							</div>
-						</div>
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual_khh01.jpg')" class="onlyPc mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual_khh01_t.jpg')" class="onlyTab mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual_khh01_m.jpg')" class="onlyMo mv"alt=""></span>
-				</div>
-				<div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>(주)페퍼저축은행</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt_pep.png" alt=""></div>
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">홈페이지 리뉴얼</p>
-								</div>
-							</div>
-							<a href="https://loan.pepperbank.kr/" class="go_btn ts03" target="_blank">READ MORE</a>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual_pep.jpg')" class="onlyPc mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual_pep_t.jpg')" class="onlyTab mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual_pep_m.jpg')" class="onlyMo mv"alt=""></span>
-				</div>
-				<div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>(주)평화이즈</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt_sim.png" alt=""></div>
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">홈페이지 신규 구축</p>
-								</div>
-							</div>
-							<a href="https://www.cmcseoul.or.kr/ccv/page/main" class="go_btn ts03" target="_blank">READ MORE</a>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual_sim.jpg')" class="onlyPc mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual_sim_t.jpg')" class="onlyTab mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual_sim_m.jpg')" class="onlyMo mv"alt=""></span>
-				</div>
-				<div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>(주)브이씨</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt01.png" alt=""></div>
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">신규 홈페이지 구축</p>
-								</div>
-							</div>
-							<a href="https://www.viruscleanlab.com/index.vc" class="go_btn ts03" target="_blank">READ MORE</a>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual01.jpg')" class="onlyPc mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual01_t.jpg')" class="onlyTab mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual01_m.jpg')" class="onlyMo mv"alt=""></span>
-				                </div>
-				                <div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>해양수산과학기술진흥원</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt02.png" alt=""></div>                                    
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">온라인 플랫폼 개선</p>
-								</div>
-							</div>
-							<a href="https://ofris.kimst.re.kr/tech-trade/index.do" class="go_btn ts03" target="_blank">READ MORE</a>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual02.jpg')" class="onlyPc mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual02_t.jpg')" class="onlyTab mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual02_m.jpg')" class="onlyMo mv"alt=""></span>
-				</div>
-				<div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>경희대학교의료원</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt03.png" alt=""></div>				
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02 ls2">유지보수 등 운영업체(5개년)</p>
-								</div>
-							</div>
-							<a href="javascript:;" class="go_btn ts03">READ MORE</a>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual03.jpg')" class="onlyPc mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual03_t.jpg')" class="onlyTab mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual03_m.jpg')" class="onlyMo mv"alt=""></span>
-				</div>
-				<div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>오토앤(주)</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt04.png" alt=""></div>				
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">레드멤버스몰 리뉴얼</p>
-								</div>
-							</div>
-							<a href="/site/subpage/work/work_sub09.jsp" class="go_btn ts03">READ MORE</a>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual04.jpg')" class="onlyPc mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual04_t.jpg')" class="onlyTab mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual04_m.jpg')" class="onlyMo mv"alt=""></span>
-				</div> 
-				<div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>(주)평화이즈</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt05.png" alt=""></div>				
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">홈페이지 신규 구축</p>
-								</div>
-							</div>
-							<a href="/site/subpage/work/work_sub06.jsp" class="go_btn ts03">READ MORE</a>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual05.jpg')" class="onlyPc mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual05_t.jpg')" class="onlyTab mv"alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual05_m.jpg')" class="onlyMo mv"alt=""></span>
-				</div>
-				<div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>(주)평화이즈</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt06.png" alt=""></div>			
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">홈페이지 구축</p>
-								</div>
-							</div>
-							<a href="/site/subpage/work/work_sub08.jsp" class="go_btn ts03">READ MORE</a>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual06.jpg')" class="onlyPc mv" alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual06_t.jpg')" class="onlyTab mv" alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual06_m.jpg')" class="onlyMo mv"alt=""></span>
-				</div>
-				<div class="slide blue">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>한국동서발전(주)</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap ts01"><img src="/site/images/main/main_v_txt07.png" alt=""></div>		
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">구축관련 구매사업</p>
-								</div>
-							</div>
-							
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual07.jpg')" class="onlyPc mv" alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual07_t.jpg')" class="onlyTab mv" alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual07_m.jpg')" class="onlyMo mv"alt=""></span>
-				</div>
-				<div class="slide">
-					<div class="inner">
-						<div class="textbox">
-							<p class="client ts03">
-								<span>Client.</span>
-								<span>한국임업진흥원</span>
-							</p>
-							<div class="v_txt_wrap">
-								<div class="v_txt01 v_txt">
-									<div class="img_wrap  ts01"><img src="/site/images/main/main_v_txt08.png" alt=""></div>					
-								</div>
-								<div class="v_txt02 v_txt">
-									<p class="ts02">운영 및 유지관리</p>
-								</div>
-							</div>
-							<a href="/site/subpage/work/work_sub01.jsp" class="go_btn ts03">READ MORE</a>
-						</div>	
-					</div>
-					<span style="background-image:url('/site/images/main/main_visual08.jpg')"class="onlyPc mv" alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual08_t.jpg')" class="onlyTab mv" alt=""></span>
-					<span style="background-image:url('/site/images/main/main_visual08_m.jpg')" class="onlyMo mv"alt=""></span>
-				</div> -->
-
-                <!-- end: 지난 슬라이드 -->
-
-
-            </div>
-            <div class="slide_ind tabPc">
-                <p class="now">01</p>
-                <div class="grp"><span></span></div>
-                <p>08</p>
-            </div>
-            <div class="mo_slide_ind onlyMo">
-                <span class="now">01</span>&nbsp;&nbsp;/&nbsp;&nbsp;<span class="all"></span>
-            </div>
-            <img class="slide_icon onlyPc" src="/site/images/main/slide_icon.png" alt="">
-        </div>
-        <footer id="footer">
-            <p class="copy onlyPc">ⓒ OSANGTECH. all rights reserved.</p>
-        </footer>
     </div>
-</body>
-<script>
 
+    <script>
+        // 페이지 로드 및 데이터 불러오기
+        async function loadData(pageNumber = 1) {
+            try {
+                const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+                const posts = response.data;
 
-    $(function () {
+                page(pageNumber, posts); // 데이터를 이용하여 페이지를 로드합니다.
+                createPaginationButtons(pageNumber, posts); //페이지네이션 버튼을 생성합니다.
 
-
-        $('.main_visual_wrap').slick({
-            dots: true,
-            infinite: true,
-            speed: 1000,
-            autoplay: false,
-            autoplaySpeed: 4000,
-            pauseOnHover: false,
-            pauseOnFocus: false
-        });
-
-
-        $('.slick-active').addClass('on');
-        var all = $('.main_visual_wrap .slick-dots li').length;
-
-        if (all < 8) {
-            $('.mo_slide_ind .all').text('0' + all);
-        } else {
-            $('.mo_slide_ind .all').text(all);
+            } catch (error) {
+                console.error('API 호출 중 오류 발생:', error);
+            }
         }
 
+        function page(pageNumber, posts) { //화면에 데이터 뿌려주기
+            const pageSize = 10;
+            const startIndex = (pageNumber - 1) * pageSize;
+            const endIndex = startIndex + pageSize;
+            const postsToDisplay = posts.slice(startIndex, endIndex);
 
-        $('.main_visual_wrap').on('afterChange', function () {
-            var idx = $('.main_visual_wrap .slick-dots .slick-active').index();
-            var now = idx + 1
-            if (now < 10) {
-                $('.slide_ind .now').text('0' + now);
-                $('.mo_slide_ind .now').text('0' + now);
-            } else {
-                $('.slide_ind .now').text(now);
-                $('.mo_slide_ind .now').text(now);
+            const postList = document.getElementById('post-list');
+            postList.innerHTML = ''; // 이전 목록을 지웁니다.
+
+            // 불러온 게시물을 목록에 추가합니다.
+            postsToDisplay.forEach(post => {
+                const listItem = document.createElement('li');
+                listItem.textContent = post.title;
+                postList.appendChild(listItem);
+            });
+        }
+
+        function createPaginationButtons(pageNumber, posts) {
+            const totalPages = Math.ceil(posts.length / 10); // 전체 페이지 수 계산
+            const paginationDiv = document.getElementById('pagination');
+            paginationDiv.innerHTML = ''; // 이전 페이지 버튼을 지웁니다.
+
+            const pageSize = 5; // 각 페이지당 표시할 버튼 수
+            let startPage = Math.floor((pageNumber - 1) / pageSize) * pageSize + 1;
+            let endPage = startPage + pageSize - 1;
+
+            // 마지막 페이지가 전체 페이지 수를 초과하지 않도록 조정
+            if (endPage > totalPages) {
+                endPage = totalPages;
             }
-            var grpW = now * 8;
-            $('.slide').removeClass('on');
-            $('.slick-active').addClass('on');
-            $('.slide_ind .grp span').width(grpW)
 
-
-        });
-
-        $('.main_visual_wrap').on('wheel', (function (e) {
-            e.preventDefault();
-
-            if (e.originalEvent.deltaY < 0) {
-                $(this).slick('slickPrev');
-            } else {
-                $(this).slick('slickNext');
+            // 이전 페이지 버튼을 생성합니다.
+            if (pageNumber > pageSize) {
+                const prevButton = document.createElement('button');
+                prevButton.textContent = '이전';
+                prevButton.onclick = function () {
+                    loadData(startPage - 1);
+                };
+                paginationDiv.appendChild(prevButton);
             }
-        }));
-    });
 
+            // 페이지 버튼을 동적으로 생성합니다.
+            for (let i = startPage; i <= endPage; i++) {
+                const button = document.createElement('button');
+                button.textContent = `페이지 ${i}`;
+                button.onclick = function () {
+                    loadData(i); // 버튼을 클릭하면 해당 페이지를 로드합니다.
+                };
+                paginationDiv.appendChild(button);
+            }
 
-    var initialX = 0;
-    var initialY = 0;
+            // 다음 페이지 버튼을 생성합니다.
+            if (endPage < totalPages) {
+                const nextButton = document.createElement('button');
+                nextButton.textContent = '다음';
+                nextButton.onclick = function () {
+                    loadData(endPage + 1);
+                };
+                paginationDiv.appendChild(nextButton);
+            }
+        }
 
-    function startAnimation() {
-        var element = document.getElementById('movingImage');
-
-        // Y축으로 100으로 이동 (4초 동안)
-        element.style.top = '100px';
-        element.style.left = '100px';
-
-        // X축으로 0에서 50으로 이동 (처음 2초 동안)
-        setTimeout(function () {
-            element.style.left = '0px';
-        }, 2000);
-
-        // X축으로 50에서 0으로 이동 (3초부터 4초까지)
-        setTimeout(function () {
-            element.style.left = '100px';
-        }, 4000);
-    }
-
-    function resetAnimation() {
-        var element = document.getElementById('movingImage');
-
-        // 초기 위치로 즉시 이동
-        element.style.left = '0';
-        element.style.top = '0';
-    }
-
-</script>
+        // 페이지 로드 및 데이터 불러오기 함수 호출
+        loadData();
+    </script>
+</body>
 
 </html>

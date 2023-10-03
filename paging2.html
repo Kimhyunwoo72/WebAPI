@@ -35,40 +35,11 @@
                 <tbody id="table-body1">
                 </tbody>
             </table>
-            <div class="paging">
-                <div class="paging__inner">
-                    <a href="javascript:;" class="paging-item paging__first prev-show no-show" onclick="goToPage(1)">&lt;&lt;</a>
-                    <a href="javascript:;" class="paging-item paging__prev  prev-show no-show" onclick="prevPage()">&lt;</a>
-                    <ul class="paging__list" id="paging-list">
-                        <!-- 페이징 버튼이 여기에 나타납니다. -->
-                    </ul>
-                    <a href="javascript:;" class="paging-item paging__next next-show" onclick="nextPage()">&gt;</a>
-                    <a href="javascript:;" class="paging-item paging__last next-show" onclick="goToPage(totalPages)">&gt;&gt;</a>
-                </div>
+            <div class="more">
+                <a href="javascript:;" class="more__btn" role="button">더보기</a>
+                <a href="javascript:;" class="more__btn" role="button" onclick="verticalMode()">세로모드</a>
             </div>
-        </div>
 
-        <!-- forEach -->
-        <div class="box">
-            <!-- <h1 class="tit">데이터 받기 forEach (get)</h1> -->
-            <table class="table table-hover">
-                <colgroup>
-                    <col style="width: 10%;">
-                    <col style="width: 30%;">
-                    <col style="width: 30%;">
-                    <col style="width: 30%;">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Image</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body2">
-                </tbody>
-            </table>
         </div>
 
     </div>
@@ -76,131 +47,49 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function getPage(pageNum) {
-            let currentPage = pageNum; // 현재 페이지
-            let itemsPerPage = 4; // 페이지당 아이템 수 (기본값)
-            let totalItems = 0; // 전체 아이템 수 (초기값을 0으로 설정)
+        function loadMoreData() {
+            const moreButton = document.querySelector('.more__btn');
+            let currentPage = 1;
 
-            // 서버에서 총 아이템 수를 가져오는 요청
-            axios.get('https://reqres.in/api/users')
-                .then(function (response) {
-                    totalItems = response.data.total; // 서버에서 총 아이템 수를 가져옵니다.
-                    // 전체 페이지 수 계산
-                    let totalPages = Math.ceil(totalItems / itemsPerPage);
+            function getUser(page) {
+                axios.get(`https://reqres.in/api/users?page=${page}&per_page=2`)
+                    .then(function (response) {
+                        const users = response.data.data;
+                        displayData(users);
+                    })
+                    .catch(function (error) {
+                        console.error('요청 실패:', error);
+                    });
+            }
 
-                    // 페이징 버튼을 생성하는 함수
-                    function createPaginationButtons() {
-                        const pagingList = document.getElementById("paging-list");
-                        pagingList.innerHTML = "";
-
-                        for (let i = 1; i <= totalPages; i++) {
-                            const button = document.createElement("li");
-                            button.innerHTML = `<a href="javascript:;" class="paging-item" onclick="goToPage(${i})">${i}</a>`;
-                            pagingList.appendChild(button);
-                        }
-                    }
-
-                    function showBtn(page) {
-                        const prevShow = document.querySelectorAll(".prev-show")
-                        const nextShow = document.querySelectorAll(".next-show")
-                        if (page == 1) {
-                            prevShow.forEach(element => {
-                                element.classList.add("no-show")
-                            });
-                        } else {
-                            prevShow.forEach(element => {
-                                element.classList.remove("no-show")
-                            });
-                        }
-
-                        if (page == totalPages) {
-                            nextShow.forEach(element => {
-                                element.classList.add("no-show")
-                            });
-                        } else {
-                            nextShow.forEach(element => {
-                                element.classList.remove("no-show")
-                            });
-                        }
-                    }
-
-                    function goToPage(page) {
-                        if (page >= 1 && page <= totalPages) {
-                            currentPage = page;
-                            axios.get(`https://reqres.in/api/users?page=${page}&per_page=${itemsPerPage}`)
-                                .then(function (response) {
-                                    const data = response.data.data;
-                                    displayData(data);
-                                    currentPage = page;
-                                    itemsPerPage = data.length;
-                                    totalPages = Math.ceil(totalItems / itemsPerPage);
-                                    createPaginationButtons();
-                                    showBtn(page);
-                                    postPage(data[0]);
-                                })
-                                .catch(function (error) {
-                                    console.error('요청 실패:', error);
-                                });
-                        }
-                    }
-
-                    function prevPage() {
-                        if (currentPage > 1) {
-                            goToPage(currentPage - 1);
-                        }
-                    }
-
-                    function nextPage() {
-                        if (currentPage < totalPages) {
-                            goToPage(currentPage + 1);
-                        }
-                    }
-
-                    function displayData(data) {
-                        const tbody1 = document.getElementById('table-body1');
-                        tbody1.innerHTML = "";
-
-                        data.forEach((user) => {
-                            tbody1.innerHTML += `
-                                    <tr>
-                                        <td scope="row" class="num">${user.id}</td>
-                                        <td class="name">${user.first_name} ${user.last_name}</td>
-                                        <td class="email">${user.email}</td>
-                                        <td><img src="${user.avatar}" alt="이미지"></td>
-                                    </tr>
-                                `;
-                        });
-                    }
-
-                    function postPage(data) {
-                        axios.post("https://reqres.in/api/users", {
-                            id: data.id,
-                            name: `${data.first_name} ${data.last_name}`,
-                            email: data.email,
-                            avatar: data.avatar
-                        })
-                            .then((response) => {
-                                const tbody2 = document.getElementById('table-body2');
-                                const user = response.data;
-
-                                tbody2.innerHTML = `
-                                        <tr>
-                                            <th scope="row" class="num">${user.id}</th>
-                                            <td class="name">${user.name}</td>
-                                            <td class="email">${user.email}</td>
-                                            <td><img src="${user.avatar}" alt="이미지"></td>
-                                        </tr>
-                                    `;
-                            });
-                    }
-
-                    // 페이지 로드 시 데이터 로딩
-                    goToPage(currentPage);
-                })
-                .catch(function (error) {
-                    console.error('총 아이템 수를 가져오는데 실패했습니다.', error);
+            function displayData(users) {
+                const tbody1 = document.getElementById('table-body1');
+                users.forEach(user => {
+                    tbody1.innerHTML += `
+            <tr>
+                <td scope="row" class="num">${user.id}</td>
+                <td class="name">${user.first_name} ${user.last_name}</td>
+                <td class="email">${user.email}</td>
+                <td><img src="${user.avatar}" alt="이미지"></td>
+            </tr>
+        `;
                 });
+            }
+
+            moreButton.addEventListener('click', function () {
+                currentPage++;
+                getUser(currentPage);
+            });
+
+            getUser(currentPage);
         }
+
+        loadMoreData();
+
+
+        function verticalMode() {
+            document.querySelector("table").classList.toggle("vertical")
+        } 
     </script>
 
 

@@ -14,6 +14,7 @@ td {vertical-align: middle; height: 150px;}
 .paging-item {display: flex; justify-content: center; align-items: center; width: 35px; height: 35px; margin: 0 5px; border: 1px solid #ccc; box-sizing: border-box;}
 .paging__inner { display: flex;}
 .paging-item.no-show {opacity: 0; pointer-events: none;}
+.paging-item.active {border: none; background-color: rgb(180, 180, 249); color: #fff;}
 
 /* 메인 */
 h1 {text-transform: uppercase; font-size: 60px;}
@@ -41,3 +42,16 @@ h1 {text-transform: uppercase; font-size: 60px;}
 .list__category span:nth-child(10) {background-color: #dcfcf4;}
 .list__desc {margin-top: 10px; font-size: calc(5px + .6vw); color: #333; line-height: 1.5;}
 .list__date {margin-top: 20px; font-size: calc(5px + .5vw); color: #777;}
+
+.more {display: flex; justify-content: center;}
+.more a {padding: 10px 20px; background-color: rgb(167, 167, 252); color: #fff;}
+.more__btn + a {margin-left: 10px;}
+
+table.vertical {display: flex; align-items: start; }
+table.vertical thead {margin-right: 50px;}
+table.vertical thead tr, 
+table.vertical thead tr th { display:block; height: 150px;}
+
+table.vertical tbody { display:block; oveflow-x:hidden; white-space:nowrap; }
+table.vertical tbody tr { display:inline-block; }
+table.vertical tbody tr td { display:block;}
