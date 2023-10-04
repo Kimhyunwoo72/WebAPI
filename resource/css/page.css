@@ -4,7 +4,7 @@
 * {
     font-family: 'Noto Sans KR', sans-serif !important;
 }
-.wrap {padding: 100px;}
+.wrap {overflow: hidden; padding: 100px;}
 .box {margin-top: 50px;}
 .tit {margin-bottom: 40px;}
 th {font-weight: bold; font-size: 20px;}
@@ -18,9 +18,9 @@ td {vertical-align: middle; height: 150px;}
 .paging__inner { display: flex;}
 .paging-item.no-show {opacity: 0; pointer-events: none;}
 .paging-item.active {border: none; background-color: rgb(180, 180, 249); color: #fff;}
-
+.table-layout {table-layout: auto;}
 /* 메인 */
-h1 {text-transform: uppercase; font-size: 60px;}
+h1 {text-transform: uppercase; margin-top: 70px; font-size: 60px;}
 .list {display: flex; flex-wrap: wrap; margin-top: 150px; padding-left: 0;}
 .item { width: calc(25% - 20px); height: auto; margin-right: 20px; margin-bottom: 40px; box-shadow: 4px 4px 10px 2px #ccc; transition: all .5s;}
 .item:hover {box-shadow: 4px 4px 10px 2px #b5d9eb;}
@@ -75,6 +75,7 @@ table.vertical tbody tr td { display:block;}
     .item {width: calc(100% / 2 - 10px); margin-right: auto;}
     .item:nth-child(3n) {margin-right: auto;}
     .item:nth-child(2n) {margin-right: 0;}
+    .box {overflow: scroll; padding-bottom: 30px;}
     .list__text-box {
         padding: 20px;
         padding-bottom: calc(50px);
@@ -87,6 +88,8 @@ table.vertical tbody tr td { display:block;}
 }
 
 @media (max-width:720px) {
+    h1 {font-size: 12vw;}
+    .list {margin-top: 100px;}
     .item {width: 100%;}
     .list__text-box {
         padding: 20px;
