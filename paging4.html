@@ -36,9 +36,10 @@
                 </tbody>
             </table>
             <div class="more">
-                <a href="javascript:;" class="more__btn" role="button"">더보기</a>
-                <a href=" javascript:;" role="button" onclick="verticalMode()">모드변경</a>
+                <a href="javascript:;" class="more__btn" role="button">더보기</a>
+                <a href="javascript:;" class="more__btn" role="button" onclick="verticalMode()">세로모드</a>
             </div>
+
         </div>
 
     </div>
@@ -46,18 +47,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-
         function loadMoreData() {
             const moreButton = document.querySelector('.more__btn');
-            let slice = 2; // 초기 slice 값 설정
             let currentPage = 1;
 
             function getUser(page) {
-                axios.get(`https://reqres.in/api/users`)
+                axios.get(`https://reqres.in/api/users?page=${page}&per_page=2`)
                     .then(function (response) {
-                        console.log()
                         const users = response.data.data;
-                        displayData(users);
+                        sortAscending(users);
                     })
                     .catch(function (error) {
                         console.error('요청 실패:', error);
@@ -66,42 +64,48 @@
 
             function displayData(users) {
                 const tbody1 = document.getElementById('table-body1');
-                for (let i = 0; i < users.length; i++) {
+                // 기존의 테이블 내용을 비웁니다.
+
+                users.forEach(user => {
                     tbody1.innerHTML += `
             <tr>
-                <td scope="row" class="num">${users[i].id}</td>
-                <td class="name">${users[i].first_name} ${users[i].last_name}</td>
-                <td class="email">${users[i].email}</td>
-                <td><img src="${users[i].avatar}" alt="이미지"></td>
+                <td scope="row" class="num">${user.id}</td>
+                <td class="name">${user.first_name} ${user.last_name}</td>
+                <td class="email">${user.email}</td>
+                <td><img src="${user.avatar}" alt="이미지"></td>
             </tr>
         `;
-                }
-
-
-                슬라이스()
+                });
             }
 
-            function 슬라이스() {
-                let trNodeList = document.querySelectorAll("tbody tr");
-                let trArray = Array.from(trNodeList);
-
-                // slice()로 새로운 배열을 생성하고 반환된 값을 변수에 저장
-                let slicedArray = trArray.slice(0, 2);
-                console.log(slicedArray);
+            function sortAscending(users) {
+                users.sort((a, b) => {
+                    let nameA = a.first_name;
+                    let nameB = b.first_name;
+                    return nameA.localeCompare(nameB)
+                });
+                displayData(users);
             }
 
 
-            getUser();
+            moreButton.addEventListener('click', function () {
+                currentPage++;
+                getUser(currentPage);
+            });
+
+            getUser(currentPage);
         }
 
         loadMoreData();
 
 
-
+        // 모드변경
         function verticalMode() {
-            document.querySelector("table").classList.toggle("vertical");
+            document.querySelector("table").classList.toggle("vertical")
         }
+
     </script>
+
 
 </body>
 
