@@ -16,8 +16,9 @@
 
         <!-- forEach -->
         <div class="box">
+            <h1 class="tit">데이터 받고 뿌려주기(새로고침X)</h1>
             <!-- <h1 class="tit">데이터 받기 forEach (get)</h1> -->
-            <table class="table table-hover">
+            <table class="table board table-hover">
                 <colgroup>
                     <col style="width: 10%;">
                     <col style="width: 30%;">
@@ -26,8 +27,8 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
+                        <th scope="col"><a href="javascript:;" class="sort" onclick="idBtn()"># <span></span></a></th>
+                        <th scope="col"><a href="javascript:;" class="sort" onclick="nameBtn()">Name <span></span></a></th>
                         <th scope="col">Email</th>
                         <th scope="col">Image</th>
                     </tr>
@@ -36,7 +37,7 @@
                 </tbody>
             </table>
             <div class="more">
-                <a href="javascript:;" class="more__btn" role="button"">더보기</a>
+                <a href="javascript:;" class="more__btn" role="button" onclick="moreList()">더보기</a>
                 <a href=" javascript:;" role="button" onclick="verticalMode()">모드변경</a>
             </div>
         </div>
@@ -47,64 +48,91 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
 
-        function loadMoreData() {
-            const moreButton = document.querySelector('.more__btn');
-            let slice = 2; // 초기 slice 값 설정
-            let currentPage = 1;
+        // 데이터 불러오기 
+        const moreButton = document.querySelector('.more__btn');
+        const tbody1 = document.getElementById('table-body1');
+        let slice = 2; // 초기 slice 값 설정
+        let currentPage = 1;
+        // 데이터
+        let users = "";
+        let ascendingOrder = true;
+        let idStatus = true;
 
-            function getUser(page) {
-                axios.get(`https://reqres.in/api/users`)
-                    .then(function (response) {
-                        const users = response.data.data;
-                        sortAscending(users);
-
-                    })
-                    .catch(function (error) {
-                        console.error('요청 실패:', error);
-                    });
+        async function getUser() {
+            try {
+                const response = await axios.get(`https://reqres.in/api/users`);
+                users = response.data.data;
+                // nameBtn();
+            } catch (error) {
+                console.error('요청 실패:', error);
             }
-
-            function displayData(users) {
-                const tbody1 = document.getElementById('table-body1');
-                tbody1.innerHTML = ''
-                for (let i = 0; i < slice; i++) {
-
-                    tbody1.innerHTML += `
-                    <tr>
-                        <td scope="row" class="num">${users[i].id}</td>
-                        <td class="name">${users[i].first_name} ${users[i].last_name}</td>
-                        <td class="email">${users[i].email}</td>
-                        <td><img src="${users[i].avatar}" alt="이미지"></td>
-                    </tr>
-                `;
-                }
-
-                document.querySelector(".more__btn").addEventListener("click", () => {
-                    if (slice <= users.length) {
-                        slice += 2; // 더보기 버튼을 누를 때마다 slice 값을 2씩 증가
-                        // console.log(slice)
-                        getUser()
-                    }
-                })
-            }
-
-            function sortAscending(users) {
-                users.sort((a, b) => {
-                    let nameA = a.first_name;
-                    let nameB = b.first_name;
-                    return nameA.localeCompare(nameB)
-                });
-                displayData(users);
-            }
-
-
-            getUser();
         }
 
-        loadMoreData();
+        // 데이터 뿌려주기
+        function displayData() {
+            tbody1.innerHTML = ''; // 이전 데이터를 지우고 새로운 데이터를 출력할 때 초기화
+            for (let i = 0; i < slice; i++) {
+                if (users[i]) { // 배열 요소가 존재할 때만 데이터를 출력하도록 수정
+                    tbody1.innerHTML += `
+                <tr>
+                    <td scope="row" class="num">${users[i].id}</td>
+                    <td class="name">${users[i].first_name} ${users[i].last_name}</td>
+                    <td class="email">${users[i].email}</td>
+                    <td><img src="${users[i].avatar}" alt="이미지"></td>
+                </tr>
+            `;
+                }
+            }
+        }
+        function moreList() {
+            if (slice <= users.length) {
+                slice += 2; // 더보기 버튼을 누를 때마다 slice 값을 2씩 증가
+                displayData()
+            }
+        }
+
+
+        async function init() {
+            await getUser();
+            await displayData()
+        }
+
+        init();
+
+
+        // 데이터 이름순 정렬하기
+        function nameBtn() {
+            ascendingOrder = !ascendingOrder;
+            nameData();
+        }
+
+        function nameData() {
+            users.sort((a, b) => {
+                let nameA = a.first_name;
+                let nameB = b.first_name;
+                return ascendingOrder ? nameB.localeCompare(nameA) : nameA.localeCompare(nameB);
+            });
+            displayData();
+        }
+
+        // 데이터 id 정렬하기
+        function idBtn() {
+            idStatus = !idStatus;
+            idData();
+        }
+
+        function idData() {
+            users.sort((a, b) => {
+                let idA = a.id;
+                let idB = b.id;
+                return idStatus ? idA - idB : idB - idA;
+            });
+            displayData();
+        }
 
 
 
+        // 모드전환
         function verticalMode() {
             document.querySelector("table").classList.toggle("vertical");
         }
